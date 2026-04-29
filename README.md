@@ -6,10 +6,14 @@ O projeto foi preparado para rodar localmente, em Docker e no Google Cloud Run. 
 
 ## URL Cloud Run
 
-Substitua pela URL após o deploy:
-
 ```text
 https://desafio-go-gcloud-run-esdras-santos-375082332631.southamerica-east1.run.app/weather/01001000
+```
+
+URL base:
+
+```text
+https://desafio-go-gcloud-run-esdras-santos-375082332631.southamerica-east1.run.app
 ```
 
 ## Contrato
@@ -199,10 +203,18 @@ gcloud builds submit --config cloudbuild.yaml \
 Ao final, o Cloud Build mostra a URL publicada. Teste:
 
 ```bash
-curl https://SUA-URL-DO-CLOUD-RUN/weather/01001000
+curl https://desafio-go-gcloud-run-esdras-santos-375082332631.southamerica-east1.run.app/weather/01001000
 ```
 
-Depois do deploy, copie a URL gerada pelo Cloud Run para a seção **URL Cloud Run** deste README.
+Resposta esperada:
+
+```json
+{
+  "temp_C": 21,
+  "temp_F": 69.8,
+  "temp_K": 294.15
+}
+```
 
 ### Trigger pelo repositório
 
