@@ -203,3 +203,32 @@ curl https://SUA-URL-DO-CLOUD-RUN/weather/01001000
 ```
 
 Depois do deploy, copie a URL gerada pelo Cloud Run para a seção **URL Cloud Run** deste README.
+
+### Trigger pelo repositório
+
+Se você criou um trigger no Cloud Build usando a opção **Dockerfile**, ele vai apenas construir a imagem. Para este projeto, use a opção **Cloud Build configuration file** apontando para:
+
+```text
+cloudbuild.yaml
+```
+
+Configuração recomendada do trigger:
+
+```text
+Event: Push to a branch
+Branch: ^main$
+Configuration: Cloud Build configuration file
+Location: Repository
+Cloud Build configuration file location: cloudbuild.yaml
+```
+
+Substitution variables do trigger:
+
+```text
+_REGION=us-central1
+_REPOSITORY=desafio-8
+_SERVICE_NAME=desafio-8-cloud-run
+_WEATHER_API_SECRET=weather-api-key
+```
+
+Com essa configuração, cada push na branch `main` executa testes, build da imagem Docker, push para o Artifact Registry e deploy no Cloud Run.
