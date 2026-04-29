@@ -42,8 +42,8 @@ func (c *ViaCEPClient) ResolveCity(ctx context.Context, zipcode string) (string,
 	}
 
 	var payload struct {
-		Localidade string `json:"localidade"`
-		Erro       bool   `json:"erro"`
+		Localidade string          `json:"localidade"`
+		Erro       viaCEPErrorFlag `json:"erro"`
 	}
 	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
 		return "", err
@@ -53,4 +53,22 @@ func (c *ViaCEPClient) ResolveCity(ctx context.Context, zipcode string) (string,
 	}
 
 	return payload.Localidade, nil
+}
+
+type viaCEPErrorFlag bool
+
+func (f *viaCEPErrorFlag) UnmarshalJSON(data []byte) error {
+	var boolValue bool
+	if err := json.Unmarshal(data, &boolValue); err == nil {
+		*f = viaCEPErrorFlag(boolValue)
+		return nil
+	}
+
+	var stringValue string
+	if err := json.Unmarshal(data, &stringValue); err != nil {
+		return err
+	}
+
+	*f = viaCEPErrorFlag(strings.EqualFold(stringValue, "true"))
+	return nil
 }

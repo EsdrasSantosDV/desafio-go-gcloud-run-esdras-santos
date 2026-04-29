@@ -30,7 +30,7 @@ func TestViaCEPClientResolveCity(t *testing.T) {
 func TestViaCEPClientNotFound(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		_, _ = w.Write([]byte(`{"erro":true}`))
+		_, _ = w.Write([]byte(`{"erro":"true"}`))
 	}))
 	defer server.Close()
 

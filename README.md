@@ -9,7 +9,7 @@ O projeto foi preparado para rodar localmente, em Docker e no Google Cloud Run. 
 Substitua pela URL após o deploy:
 
 ```text
-https://SEU-SERVICO.a.run.app/weather/01001000
+https://desafio-go-gcloud-run-esdras-santos-375082332631.southamerica-east1.run.app/weather/01001000
 ```
 
 ## Contrato
